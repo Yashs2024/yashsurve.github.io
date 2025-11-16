@@ -1,0 +1,897 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yash Surve — Portfolio</title>
+    <meta name="description" content="Portfolio of Yash Surve — Automation and Robotics student specializing in AI/ML, ROS2, agentic AI, and software automation.">
+    <meta name="theme-color" content="#2D3748">
+    <meta property="og:title" content="Yash Surve — Portfolio">
+    <meta property="og:description" content="Automation and Robotics student specializing in AI/ML, ROS2, and software automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Yash+Surve+Portfolio">
+    <meta property="og:url" content="https://example.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --dark: #0F172A;
+            --dark-2: #111827;
+            --panel: rgba(255, 255, 255, 0.05);
+            --light: #F8FAFC;
+            --muted: #CBD5E0;
+            --accent: #00D1B2;
+            --ring: rgba(108, 99, 255, 0.25);
+            --container: 1100px;
+            --radius: 16px;
+            --shadow-1: 0 10px 20px rgba(0, 0, 0, 0.25);
+            --shadow-2: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: radial-gradient(1200px 800px at 100% -10%, rgba(108, 99, 255, 0.16), transparent 60%),
+                        radial-gradient(800px 600px at -10% 110%, rgba(255, 101, 132, 0.12), transparent 60%),
+                        var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.55;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .skip-link:focus {
+            left: 1rem;
+            top: 1rem;
+            width: auto;
+            height: auto;
+            background: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            z-index: 2000;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 39, 0.7);
+            z-index: 1000;
+            transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+        }
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 0;
+        }
+        .navbar.scrolled .navbar-inner {
+            padding: 0.7rem 0;
+        }
+        .navbar.scrolled {
+            box-shadow: var(--shadow-1);
+            background: rgba(17, 24, 39, 0.85);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 800;
+            letter-spacing: 0.4px;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: inline-block;
+            background: conic-gradient(from 180deg, var(--primary), var(--accent), var(--secondary), var(--primary));
+            transform: rotate(12deg);
+            transition: transform 0.5s ease;
+        }
+        .logo:hover .logo-icon { transform: rotate(372deg); }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.98rem;
+            opacity: 0.9;
+            position: relative;
+            padding: 0.35rem 0.2rem;
+            transition: opacity 0.25s ease, color 0.25s ease;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+        .nav a:hover { opacity: 1; }
+        .nav a:hover::after { transform: scaleX(1); }
+        .nav a.active {
+            color: var(--primary);
+        }
+        .nav a.active::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.04);
+            color: var(--light);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .hamburger span, .hamburger::before, .hamburger::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--light);
+            border-radius: 2px;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+        .hamburger::before { transform: translateY(-6px); }
+        .hamburger::after { transform: translateY(6px); }
+        .hamburger[aria-expanded="true"] span { opacity: 0; }
+        .hamburger[aria-expanded="true"]::before { transform: rotate(45deg); }
+        .hamburger[aria-expanded="true"]::after { transform: rotate(-45deg); }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.8rem 0 1.2rem;
+        }
+        .mobile-nav a {
+            padding: 0.7rem 0.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .hero {
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-inner {
+            width: 100%;
+        }
+        .hero-content {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 8rem;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(108, 99, 255, 0.14);
+            color: #DDE3F0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #FFF, #C7C9FF 60%, #A8F8E7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+            color: var(--muted);
+            margin: 0 auto 1.7rem;
+            max-width: 680px;
+        }
+        .cta {
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            appearance: none;
+            border: 0;
+            border-radius: 999px;
+            padding: 0.9rem 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary {
+            color: var(--light);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: var(--shadow-1);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+        .btn-outline {
+            color: var(--light);
+            background: transparent;
+            border: 2px solid rgba(108, 99, 255, 0.5);
+        }
+        .btn-outline:hover { background: rgba(108,99,255,0.1); transform: translateY(-2px); }
+
+        .section {
+            padding: 96px 0;
+            position: relative;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 14px;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--muted);
+            max-width: 760px;
+            margin: 0 auto 42px;
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 14px;
+        }
+        .card {
+            background: var(--panel);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: var(--radius);
+            padding: 26px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-1);
+            border-color: rgba(108,99,255,0.35);
+        }
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(108,99,255,0.12);
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-icon svg { width: 32px; height: 32px; fill: var(--primary); }
+        .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .card p { color: var(--muted); }
+
+        .skills-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .badge {
+            font-size: 0.85rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .gallery {
+            background: #0B1220;
+            position: relative;
+            overflow: hidden;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #0D1525;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            aspect-ratio: 1/1;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover { transform: translateY(-6px); border-color: rgba(108,99,255,0.3); box-shadow: var(--shadow-1); }
+        .gallery-item:hover img { transform: scale(1.06); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            align-items: end;
+            padding: 16px;
+            background: linear-gradient(180deg, transparent 40%, rgba(12, 18, 32, 0.82));
+        }
+        .gallery-overlay h3 { font-size: 1rem; }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 18px;
+        }
+        .contact-info { grid-column: span 5; }
+        .contact-form { grid-column: span 7; }
+        @media (max-width: 900px) {
+            .contact-info, .contact-form { grid-column: 1 / -1; }
+        }
+        .contact-lead {
+            color: var(--muted);
+            margin: 10px 0 18px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+        }
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(108,99,255,0.12);
+            display: grid;
+            place-items: center;
+        }
+        .contact-icon svg { width: 22px; height: 22px; fill: var(--primary); }
+        .contact-text { color: var(--light); }
+
+        .form {
+            background: var(--panel);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .form-group { margin-bottom: 14px; }
+        .label {
+            display: inline-block;
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+            color: #E5E7EB;
+        }
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
+        .input, .textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            color: var(--light);
+            border: 1px solid rgba(255,255,255,0.12);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+        }
+        .input:focus, .textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--ring);
+            transform: translateY(-1px);
+        }
+        .textarea { min-height: 150px; resize: vertical; }
+        .submit {
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .footer {
+            padding: 36px 0;
+            background: #0A0F1C;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-inner {
+            display: grid;
+            place-items: center;
+            gap: 14px;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+        .social {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .social:hover { transform: translateY(-4px); background: rgba(108,99,255,0.16); border-color: rgba(108,99,255,0.4); }
+        .social svg { width: 20px; height: 20px; fill: var(--light); }
+        .copy { color: #8A93A3; font-size: 0.92rem; }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--light);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            box-shadow: var(--shadow-1);
+            z-index: 900;
+            border: 0;
+        }
+        .scroll-top.active { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+        .scroll-top svg { width: 22px; height: 22px; fill: var(--light); }
+
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .nav { display: none; }
+            .hamburger { display: inline-flex; }
+            .mobile-nav { display: none; }
+            .mobile-nav.open { display: flex; }
+            .hero-content { padding-top: 7rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="navbar" role="banner">
+        <div class="container navbar-inner">
+            <a href="#home" class="logo" aria-label="Go to home">
+                <span class="logo-icon" aria-hidden="true"></span>
+                <span>Yash Surve</span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="hamburger" aria-label="Toggle menu" aria-controls="mobile-nav" aria-expanded="false">
+                <span></span>
+            </button>
+        </div>
+        <div class="container">
+            <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <div class="container hero-inner">
+                <div class="hero-content reveal">
+                    <div class="eyebrow">Automation & Robotics • AI/ML</div>
+                    <h1 id="hero-title">Hi, I’m Yash Surve.</h1>
+                    <p>
+                        Automation and Robotics student at M.E.S Wadia College of Engineering. I work on agentic AI, ROS2, computer vision, and software automation to build practical, reliable systems.
+                    </p>
+                    <div class="cta">
+                        <a class="btn btn-primary" href="Yash_Surve_CV.pdf" download>Download CV</a>
+                        <a class="btn btn-outline" href="#contact">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <h2 class="section-title reveal" id="about-title">About Me</h2>
+                <p class="section-sub reveal">Passionate about bridging AI and robotics to solve real-world problems.</p>
+                <div class="features-grid">
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-2.8 0-8 1.4-8 4v2h16v-2c0-2.6-5.2-4-8-4Z"/></svg>
+                        </div>
+                        <h3>Who I Am</h3>
+                        <p>Robotics and Automation student exploring Arduino, ROS2, Agentic AI, TensorFlow, and RPA. I enjoy building end-to-end systems from prototype to deployment.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm6-2h4v2h-4Z"/></svg>
+                        </div>
+                        <h3>Experience</h3>
+                        <p>AI/ML Intern at Personifyy — working on model development, evaluation, and integration with production systems.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 3-11 6v2h2v8l9 4 9-4v-8h2V9L12 3Z"/></svg>
+                        </div>
+                        <h3>Education</h3>
+                        <p>B.Tech in Automation & Robotics — Nowrosjee Wadia College of Engineering.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section" aria-labelledby="skills-title">
+            <div class="container">
+                <h2 class="section-title reveal" id="skills-title">My Skills</h2>
+                <p class="section-sub reveal">I focus on modern full‑stack and AI/robotics tooling.</p>
+                <div class="features-grid">
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6 1.4-1.4L4.8 12l4.6-4.6L8 6Zm7.4 0-1.4 1.4 4.6 4.6-4.6 4.6L15.4 18l6-6-6-6Z"/></svg>
+                        </div>
+                        <h3>Frontend</h3>
+                        <div class="skills-badges">
+                            <span class="badge">HTML5</span>
+                            <span class="badge">CSS</span>
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">React</span>
+                            <span class="badge">Next.js</span>
+                            <span class="badge">Tailwind</span>
+                            <span class="badge">MUI</span>
+                        </div>
+                    </article>
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg>
+                        </div>
+                        <h3>Backend</h3>
+                        <div class="skills-badges">
+                            <span class="badge">Node.js</span>
+                            <span class="badge">Python</span>
+                            <span class="badge">GraphQL</span>
+                            <span class="badge">REST</span>
+                            <span class="badge">MongoDB</span>
+                            <span class="badge">PostgreSQL</span>
+                            <span class="badge">AWS</span>
+                            <span class="badge">Firebase</span>
+                        </div>
+                    </article>
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35 10.55 20C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 0 1 7.5 3c1.9 0 3.6.9 4.5 2.3A5.4 5.4 0 0 1 16.5 3C19.6 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.55Z"/></svg>
+                        </div>
+                        <h3>Design</h3>
+                        <div class="skills-badges">
+                            <span class="badge">Figma</span>
+                            <span class="badge">Adobe XD</span>
+                            <span class="badge">UX</span>
+                            <span class="badge">Accessibility</span>
+                            <span class="badge">Design Systems</span>
+                        </div>
+                    </article>
+                    <article class="card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v1a3 3 0 0 0-3 3 5 5 0 0 0 5 5h6a4 4 0 0 0 4-4 4 4 0 0 0-3-3.87V7a5 5 0 0 0-4-5Z"/></svg>
+                        </div>
+                        <h3>AI / ML</h3>
+                        <div class="skills-badges">
+                            <span class="badge">Advanced Python</span>
+                            <span class="badge">NLP</span>
+                            <span class="badge">CNN</span>
+                            <span class="badge">Deep Learning</span>
+                            <span class="badge">TensorFlow</span>
+                            <span class="badge">NumPy</span>
+                            <span class="badge">Matplotlib</span>
+                            <span class="badge">OpenCV</span>
+                            <span class="badge">Google Colab</span>
+                            <span class="badge">Keras</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section gallery" aria-labelledby="portfolio-title">
+            <div class="container">
+                <h2 class="section-title reveal" id="portfolio-title">My Portfolio</h2>
+                <p class="section-sub reveal">Selected projects across ML, CV, and product engineering.</p>
+                <div class="gallery-grid">
+                    <a class="gallery-item reveal" href="https://colab.research.google.com/drive/1hfv9RYbRj0pSt9skbwsaPqMgUebHUk6t?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Text Classification System notebook in Google Colab">
+                        <img src="https://via.placeholder.com/800x800.png?text=Text+Classification" alt="Text classification system UI" loading="lazy" decoding="async">
+                        <div class="gallery-overlay"><h3>Text Classification System</h3></div>
+                    </a>
+                    <a class="gallery-item reveal" href="https://colab.research.google.com/drive/1LbFOXbRLl_6ywsoxOkRqP2Hqte0Tbm6e?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Object Detection System notebook in Google Colab">
+                        <img src="https://via.placeholder.com/800x800.png?text=Object+Detection" alt="Object detection bounding boxes" loading="lazy" decoding="async">
+                        <div class="gallery-overlay"><h3>Object Detection System</h3></div>
+                    </a>
+                    <a class="gallery-item reveal" href="https://colab.research.google.com/drive/1v7ecfkVvTQM67mc3KYrXpDoNLUD3-K4h?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Landmark Detection System notebook in Google Colab">
+                        <img src="https://via.placeholder.com/800x800.png?text=Landmark+Detection" alt="Landmark detection illustration" loading="lazy" decoding="async">
+                        <div class="gallery-overlay"><h3>Landmark Detection System</h3></div>
+                    </a>
+                    <a class="gallery-item reveal" href="#" aria-label="Alumni management system project">
+                        <img src="https://via.placeholder.com/800x800.png?text=AlumniX" alt="AlumniX dashboard" loading="lazy" decoding="async">
+                        <div class="gallery-overlay"><h3>AlumniX — Alumni Management</h3></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 class="section-title reveal" id="contact-title">Get In Touch</h2>
+                <p class="section-sub reveal">I’m available for internships, freelance, and collaborations.</p>
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <h3>Let’s Connect</h3>
+                        <p class="contact-lead">Reach out to discuss a project or just say hello!</p>
+
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+                            </div>
+                            <div class="contact-text">Pune, Maharashtra, India</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v0l-10 6L2 6v0Z"/><path d="M22 18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2"/></svg>
+                            </div>
+                            <a class="contact-text" href="mailto:yashusurve2005@gmail.com">yashusurve2005@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.3 1.1.4 2.3.6 3.6.6.6 0 1 .5 1 1V20c0 .6-.5 1-1 1-9.4 0-17-7.6-17-17 0-.6.5-1 1-1H7c.6 0 1 .5 1 1 0 1.3.2 2.4.6 3.6.1.3 0 .7-.3 1l-2.2 2.2Z"/></svg>
+                            </div>
+                            <a class="contact-text" href="tel:+917972308355">+91 79723 08355</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form reveal">
+                        <form class="form" action="#" method="post" novalidate>
+                            <div class="form-group">
+                                <label class="label visually-hidden" for="name">Your Name</label>
+                                <input id="name" name="name" class="input" type="text" placeholder="Your Name" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="label visually-hidden" for="email">Your Email</label>
+                                <input id="email" name="email" class="input" type="email" placeholder="Your Email" autocomplete="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="label visually-hidden" for="subject">Subject</label>
+                                <input id="subject" name="subject" class="input" type="text" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="label visually-hidden" for="message">Your Message</label>
+                                <textarea id="message" name="message" class="textarea" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-inner">
+            <div class="logo" aria-label="Brand">
+                <span class="logo-icon" aria-hidden="true"></span>
+                <span>Yash Surve</span>
+            </div>
+            <nav class="footer-links" aria-label="Footer">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="footer-social" aria-label="Social media">
+                <a class="social" href="https://www.linkedin.com/in/yash-surve-3b6a72253" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11H10.1v8.37h2.82v-4.93c0-.77.63-1.4 1.4-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M7 8.56a1.68 1.68 0 1 0 0-3.37 1.68 1.68 0 0 0 0 3.37M8.39 18.5v-8.37H5.61v8.37h2.78Z"/></svg>
+                </a>
+                <a class="social" href="#" aria-label="Twitter / X">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5.8c-.7.3-1.5.5-2.3.6a4 4 0 0 0 1.8-2.2c-.7.4-1.6.8-2.5 1a4.1 4.1 0 0 0-7 3.8A11.7 11.7 0 0 1 3 4.7a4.2 4.2 0 0 0 1.3 5.6c-.6 0-1.2-.2-1.8-.5a4.1 4.1 0 0 0 3.3 4.1c-.5.1-1 .1-1.5.1.4 1.3 1.9 2.3 3.6 2.3A8.3 8.3 0 0 1 2.5 18 11.7 11.7 0 0 0 9 19.9c7.7 0 11.9-6.3 11.9-11.8 0-.2 0-.4 0-.6a8.4 8.4 0 0 0 2.1-2.1Z"/></svg>
+                </a>
+                <a class="social" href="https://github.com/Yashs2024" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.1-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a12 12 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.9 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+                </a>
+            </div>
+            <div class="container" style="text-align:center;margin-top:6px;">
+                <div class="copy">© 2025 Yash Surve. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m7.4 15.4 4.6-4.6 4.6 4.6L18 14l-6-6-6 6Z"/></svg>
+    </button>
+
+    <script>
+        const doc = document.documentElement;
+        const navBar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav a, #mobile-nav a');
+        const sections = [...document.querySelectorAll('section[id]')];
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.getElementById('mobile-nav');
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        const reveals = document.querySelectorAll('.reveal');
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const setActiveNav = () => {
+            const offset = 160;
+            let current = sections[0]?.id || '';
+            sections.forEach(sec => {
+                const top = sec.offsetTop - offset;
+                if (window.scrollY >= top) current = sec.id;
+            });
+            navLinks.forEach(a => {
+                const match = a.getAttribute('href') === '#' + current;
+                a.classList.toggle('active', match);
+            });
+        };
+
+        const onScroll = () => {
+            if (window.scrollY > 80) navBar.classList.add('scrolled'); else navBar.classList.remove('scrolled');
+            setActiveNav();
+            if (window.scrollY > 300) scrollTopBtn.classList.add('active'); else scrollTopBtn.classList.remove('active');
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        navLinks.forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (!href || !href.startsWith('#')) return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (!target) return;
+                const y = target.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+                if (mobileNav.classList.contains('open')) {
+                    mobileNav.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        hamburger.addEventListener('click', () => {
+            const open = mobileNav.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', String(open));
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+            reveals.forEach(el => obs.observe(el));
+        } else {
+            reveals.forEach(el => el.classList.add('visible'));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // simple fade-in
+            doc.style.scrollBehavior = 'smooth';
+        });
+
+        const form = document.querySelector('.contact-form form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const original = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = 'Sending...';
+                setTimeout(() => {
+                    btn.textContent = 'Message Sent!';
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = original;
+                        form.reset();
+                    }, 2200);
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+</html>
+
